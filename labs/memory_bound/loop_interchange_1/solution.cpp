@@ -4,18 +4,24 @@
 #include <string_view>
 
 // Make zero matrix
-void zero(Matrix &result) {
-  for (int i = 0; i < N; i++) {
-    for (int j = 0; j < N; j++) {
+void zero(Matrix &result)
+{
+  for (int i = 0; i < N; i++)
+  {
+    for (int j = 0; j < N; j++)
+    {
       result[i][j] = 0;
     }
   }
 }
 
 // Make identity matrix
-void identity(Matrix &result) {
-  for (int i = 0; i < N; i++) {
-    for (int j = 0; j < N; j++) {
+void identity(Matrix &result)
+{
+  for (int i = 0; i < N; i++)
+  {
+    for (int j = 0; j < N; j++)
+    {
       result[i][j] = 0;
     }
     result[i][i] = 1;
@@ -23,12 +29,16 @@ void identity(Matrix &result) {
 }
 
 // Multiply two square matrices
-void multiply(Matrix &result, const Matrix &a, const Matrix &b) {
+void multiply(Matrix &result, const Matrix &a, const Matrix &b)
+{
   zero(result);
 
-  for (int i = 0; i < N; i++) {
-    for (int j = 0; j < N; j++) {
-      for (int k = 0; k < N; k++) {
+  for (int i = 0; i < N; i++)
+  {
+    for (int k = 0; k < N; k++)
+    {
+      for (int j = 0; j < N; j++)
+      {
         result[i][j] += a[i][k] * b[k][j];
       }
     }
@@ -36,7 +46,8 @@ void multiply(Matrix &result, const Matrix &a, const Matrix &b) {
 }
 
 // Compute integer power of a given square matrix
-Matrix power(const Matrix &input, const uint32_t k) {
+Matrix power(const Matrix &input, const uint32_t k)
+{
   // Temporary products
   std::unique_ptr<Matrix> productCurrent(new Matrix());
   std::unique_ptr<Matrix> productNext(new Matrix());
@@ -50,8 +61,10 @@ Matrix power(const Matrix &input, const uint32_t k) {
   *elementCurrent = input;
 
   // Use binary representation of k to be O(log(k))
-  for (auto i = k; i > 0; i /= 2) {
-    if (i % 2 != 0) {
+  for (auto i = k; i > 0; i /= 2)
+  {
+    if (i % 2 != 0)
+    {
       // Multiply the product by element
       multiply(*productNext, *productCurrent, *elementCurrent);
       std::swap(productNext, productCurrent);
